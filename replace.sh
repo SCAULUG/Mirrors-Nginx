@@ -17,12 +17,15 @@
 #      REVISION:  ---
 #===============================================================================
 
+RESULT="/mirrors/result"  
+INDEX="/Mirrors-Index/index.html"
+
 while : ;do
-    Mirrors_List=$(sed -n '2,$p' result | awk '{print $1}')
+    Mirrors_List=$(sed -n '2,$p' ${RESULT} | awk '{print $1}')
     for mirror in ${Mirrors_List} ; do
-	time=$(sed -n "/${mirror} /p" /mirrors/result| grep -Eo '[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}')
+	time=$(sed -n "/${mirror} /p" ${RESULT} | grep -Eo '[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}')
 	if  [ "${time}" != "" ]; then
-	    sed  -i "/${mirror}\//{n ;s/<TD>.*<\/TD>/<TD>${time}<\/TD>/g}" /Mirrors-Index/index.html
+	    sed  -i "/${mirror}\//{n ;s/<TD>.*<\/TD>/<TD>${time}<\/TD>/g}" ${INDEX}
 	fi
     done
     sleep 1m
