@@ -9,7 +9,6 @@ RUN git clone -b master --single-branch https://github.com/SCAULUG/Mirrors-Help.
 FROM vizv/nginx
 COPY --from=builder /dist/Mirrors-Index /Mirrors-Index/
 RUN mkdir /mirrors \
-        && touch /mirrors/result \
 	&& ln -s /mirrors/result /Mirrors-Index/result 
 COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./mime.types /etc/nginx/mime.types
