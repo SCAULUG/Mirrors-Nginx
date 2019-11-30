@@ -6,7 +6,7 @@ RUN git clone -b master --single-branch https://github.com/SCAULUG/Mirrors-Help.
     git clone -b master --single-branch https://github.com/SCAULUG/Mirrors-Index.git "${DPATH}/Mirrors-Index" && \
     cd /Mirrors-Help && make html && mv build/html ${DPATH}/Mirrors-Index/mirrors-help 
 	
-FROM vizv/nginx
+FROM locez/nginx
 COPY --from=builder /dist/Mirrors-Index /Mirrors-Index/
 RUN mkdir /mirrors \
 	&& ln -s /mirrors/result /Mirrors-Index/result 
